@@ -1,3 +1,8 @@
+# Full Stack Open 2019 - Notes App
+This is the code of the Notes App build from the lessons.
+
+---
+---
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
