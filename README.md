@@ -1,6 +1,14 @@
 # Full Stack Open 2019 - Notes App
 This is the code of the Notes App build from the lessons.
 
+### part2
+- `part2-1` &mdash; [**[a]**](https://fullstackopen.com/en/part2/rendering_a_collection_modules) Rendering a collection, modules
+- `part2-2` &mdash; [**[b]**](https://fullstackopen.com/en/part2/forms) Forms
+- `part2-1` &mdash; [**[c]**](https://fullstackopen.com/en/part2/getting_data_from_server) Getting data from server
+- `part2-1` &mdash; [**[d]**](https://fullstackopen.com/en/part2/altering_data_in_server) Altering data in server
+- `part2-1` &mdash; [**[e]**](https://fullstackopen.com/en/part2/adding_styles_to_react_app) Adding styles to React app
+
+
 ---
 ---
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
