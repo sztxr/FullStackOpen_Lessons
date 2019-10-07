@@ -8,6 +8,37 @@ This is the code of the Notes App build from the lessons.
 - `part2-4` &mdash; [**[d]**](https://fullstackopen.com/en/part2/altering_data_in_server) Altering data in server
 - `part2-5` &mdash; [**[e]**](https://fullstackopen.com/en/part2/adding_styles_to_react_app) Adding styles to React app
 
+### run JSON-server
+`npx json-server --port 3001 --watch db.json`
+
+### useEffect to fetch data
+```js
+  // A compact way of doing it
+  useEffect(() => {
+    console.log('effect')
+    axios
+      .get('http://localhost:3001/notes')
+      .then(response => {
+        console.log('promise fulfilled')
+        setNotes(response.data)
+      })
+    }, [])
+
+  // A less compact way of doing it
+  const hook = () => {
+    console.log('effect')
+    axios
+      .get('http://localhost:3001/notes')
+      .then(response => {
+        console.log('promise fulfilled')
+        setNotes(response.data)
+      })
+  }
+  console.log('render', notes.length, 'notes')
+  // takes two parameters: 1: function (effect), 2: number of times the effect will run
+  // if the second parameter is an empty array [], the effect is only run along with the first render of the component
+  useEffect(hook, [])
+```
 
 ---
 ---
