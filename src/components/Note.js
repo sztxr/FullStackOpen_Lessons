@@ -3,9 +3,9 @@ import React from 'react'
 const Note = ({ note, toggleImportance }) => {
   const label = note.important ? 'mark as not important' : 'mark as important'
   return (
-    <li>
+    <li className='note'>
       {note.content}
-      <button onClick={toggleImportance}>{label}</button>
+      <button className='btn btn-secondary' onClick={toggleImportance}>{label}</button>
     </li>
   )
 }
