@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import Note from './components/Note'
 import noteService from './services/notes'
+import Note from './components/Note'
+import Notification from './components/Notification'
+import Footer from './components/Footer'
 
 const App = (props) => {
   const [notes, setNotes] = useState([])
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   const hook = () => {
     noteService
@@ -24,7 +27,7 @@ const App = (props) => {
     <Note
       key={note.id}
       note={note}
-      toggleImportance={() => toggleImportance(note.id)}
+      toggleImportance={() => toggleImportanceOf(note.id)}
     />
   )
 
@@ -49,9 +52,7 @@ const App = (props) => {
       })
   }
 
-  const toggleImportance = id => {
-    // console.log(`importance of ${id} needs to be toggled`)
-
+  const toggleImportanceOf = id => {
     // array find method to find the note we want to modify, and assing it to the `note` variable
     const note = notes.find(n => n.id === id)
     // then we create a new object that is the exact copy of the note we saved,
@@ -69,33 +70,41 @@ const App = (props) => {
         setNotes(notes.map(note => note.id !== id ? note : returnedNote))
       })
       .catch(err => {
-        alert(`the note '${note.content}' was already deleted from server`)
+        setErrorMessage(`The note '${note.content}' was already deleted from server`)
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
         //return an array with only the items from the list for which n.id !== id return true for
         setNotes(notes.filter(n => n.id !== id))
       })
 
   }
 
-
-
   return (
     <div>
       <h1>Notes</h1>
+
+      <Notification message={errorMessage} />
+
       <div>
-        <button onClick={() => setShowAll(!showAll)}>
+        <button className='btn btn-primary' onClick={() => setShowAll(!showAll)}>
           show {showAll ? 'important' : 'all'}
         </button>
       </div>
-      <ul>
+
+      <ul className='note-container'>
         {rows()}
       </ul>
+
       <form onSubmit={addNote}>
         <input
           value={newNote}
           onChange={handleNoteChange}
         />
-        <button type='submit'>Save</button>
+        <button className='btn btn-primary' type='submit'>Add</button>
       </form>
+
+      <Footer />
     </div>
   )
 }
