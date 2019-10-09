@@ -20,10 +20,32 @@ const App = (props) => {
     ? notes
     : notes.filter(note => note.important) // note.important === true
 
+  const toggleImportance = id => {
+    // console.log(`importance of ${id} needs to be toggled`)
+
+    // define unique url for each note resource based on its id
+    const url = `http://localhost:3001/notes/${id}`
+    // array find method to find the note we want to modify, and assing it to the `note` variable
+    const note = notes.find(n => n.id === id)
+    // then we create a new object that is the exact copy of the note we saved,
+    // apart from the important property, which we toggle to be the opposite of its previous value
+    const changedNote = { ...note, important: !note.important } // shallow copy
+
+    // The callback function sets the component's notes state to a new array that
+    // contains all the items from the previous notes array, except for the old note
+    // which is replaced by the updated version of it returned by the server:
+    axios
+      .put(url, changedNote)
+      .then(res => setNotes(notes.map(note => note.id !== id ? note : res.data)))
+    // if note.id !== id is true, we simply copy the item from the old array into the new array
+    // if the condition is false, then the note object returned by the server is added to the array instead.
+  }
+
   const rows = () => notesToShow.map(note =>
     <Note
       key={note.id}
       note={note}
+      toggleImportance={() => toggleImportance(note.id)}
     />
   )
 
@@ -32,12 +54,18 @@ const App = (props) => {
     const noteObject = {
       content: newNote,
       date: new Date().toISOString(),
-      important: Math.random() > 0.5,
-      id: notes.length + 1,
+      important: Math.random() > 0.5
     }
-    // setNotes(notes.concat(noteObject))
-    setNotes([...notes, noteObject])
-    setNewNote('')
+    // // setNotes(notes.concat(noteObject))
+    // setNotes([...notes, noteObject])
+    // setNewNote('')
+    axios
+      .post('http://localhost:3001/notes', noteObject)
+      .then(res => {
+        // console.log(res)
+        setNotes([...notes, res.data])
+        setNewNote('')
+      })
   }
 
   const handleNoteChange = (e) => {
