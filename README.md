@@ -8,6 +8,31 @@ This is the code of the Notes App build from the lessons.
 - `part2-4` &mdash; [**[d]**](https://fullstackopen.com/en/part2/altering_data_in_server) Altering data in server
 - `part2-5` &mdash; [**[e]**](https://fullstackopen.com/en/part2/adding_styles_to_react_app) Adding styles to React app
 
+### part3
+- `part3-1` &mdash; [**[a]**](https://fullstackopen.com/en/part3/node_js_and_express) Node.js and Express
+- `part3-2` &mdash; [**[b]**](https://fullstackopen.com/en/part3/deploying_app_to_internet) Deploying app to internet
+- `part3-3` &mdash; [**[c]**](https://fullstackopen.com/en/part3/saving_data_to_mongo_db) Saving data to MongoDB
+- `part3-4` &mdash; [**[d]**](https://fullstackopen.com/en/part3/validation_and_es_lint) Validation and ESLint
+
+&nbsp;
+---
+---
+
+### HTTP
+
+| URL        | verb   | functionality 
+| ---------- | ------ | ------------- |
+| notes      | GET    | fetches all resources in the collection
+| notes      | POST   | creates a new resource based on the request data
+| notes/:id  | GET    | fetches a single resource
+| notes/:id  | DELETE | removes the identified resource
+| notes/:id  | PUT    | replaces the entire identified resource with the request data
+| notes/:id  | PATCH  | replaces a part of the identified resource with the request data
+
+&nbsp;
+---
+---
+
 ### run JSON-server
 `npx json-server --port 3001 --watch db.json`
 
@@ -40,6 +65,7 @@ This is the code of the Notes App build from the lessons.
   useEffect(hook, [])
 ```
 
+&nbsp;
 ---
 ---
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
