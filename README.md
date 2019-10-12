@@ -1,5 +1,5 @@
 # Full Stack Open 2019 - Notes App
-This is the code of the Notes App build from the lessons.
+This is the code of the Notes App built from the lessons.
 
 ### part2
 - `part2-1` &mdash; [**[a]**](https://fullstackopen.com/en/part2/rendering_a_collection_modules) Rendering a collection, modules
