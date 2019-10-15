@@ -1,11 +1,16 @@
 const express = require('express')
 const app = express()
+
 const bodyParser = require('body-parser')
 // bodyParser is taken into use before the requestLogger middleware,
 // because otherwise request.body will not be initialized when the logger is executed
 app.use(bodyParser.json())
 
 // MIDDLEWARE
+
+const cors = require('cors')
+app.use(cors())
+
 const requestLogger = (request, response, next) => {
   console.log('Method:', request.method)
   console.log('Path:  ', request.path)
@@ -107,7 +112,7 @@ const unknownEndpoint = (request, response) => {
 app.use(unknownEndpoint)
 
 // PORT
-const PORT = 3003
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
