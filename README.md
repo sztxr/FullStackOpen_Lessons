@@ -1,5 +1,5 @@
 # Full Stack Open 2019 &mdash; Lessons Exercise
-&mdash; **Notes App** & **Backend code**
+&mdash; **Notes App** &ndash; **Frontend & Backend code**
 
 ### part2
 - `part2-1` &mdash; [**[a]**](https://fullstackopen.com/en/part2/rendering_a_collection_modules) Rendering a collection, modules
