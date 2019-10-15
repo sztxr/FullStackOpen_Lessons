@@ -1,17 +1,22 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-
+// bodyParser is taken into use before the requestLogger middleware,
+// because otherwise request.body will not be initialized when the logger is executed
 app.use(bodyParser.json())
 
+// MIDDLEWARE
 const requestLogger = (request, response, next) => {
   console.log('Method:', request.method)
   console.log('Path:  ', request.path)
   console.log('Body:  ', request.body)
   console.log('---')
+  // The next function yields control to the next middleware
   next()
 }
+app.use(requestLogger)
 
+// NOTES
 let notes = [
   {
     id: 1,
@@ -95,6 +100,13 @@ app.post('/notes', (request, response) => {
   response.json(note)
 })
 
+// Middleware to catch non-existent routes
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({ error: 'unknown endpoint' })
+}
+app.use(unknownEndpoint)
+
+// PORT
 const PORT = 3003
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
