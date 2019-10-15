@@ -100,6 +100,8 @@ app.delete('/notes/:id', (request, response) => {
   notes = notes.filter(note => note.id !== id)
   // 204 no content
   response.status(204).end()
+  // we respond to the request with the status code 204 no content
+  // and return no data with the response.
 })
 
 /*
@@ -133,7 +135,7 @@ app.post('/notes', (request, response) => {
   }
 
   notes = notes.concat(note)
-  response.json()
+  response.json(note)
 })
 
 

@@ -4,6 +4,14 @@ const bodyParser = require('body-parser')
 
 app.use(bodyParser.json())
 
+const requestLogger = (request, response, next) => {
+  console.log('Method:', request.method)
+  console.log('Path:  ', request.path)
+  console.log('Body:  ', request.body)
+  console.log('---')
+  next()
+}
+
 let notes = [
   {
     id: 1,
@@ -24,6 +32,8 @@ let notes = [
     important: true
   }
 ]
+
+// GET
 
 app.get('/', (request, response) => {
   response.send('<h1>Hello World!</h1>')
@@ -46,12 +56,16 @@ app.get('/notes/:id', (request, response) => {
   }
 })
 
+// DELETE
+
 app.delete('/notes/:id', (request, response) => {
   const id = Number(request.params.id)
   notes = notes.filter(note => note.id !== id)
   // 204 no content
   response.status(204).end()
 })
+
+// POST
 
 const generateId = () => {
   const maxId = notes.length > 0
@@ -78,7 +92,7 @@ app.post('/notes', (request, response) => {
   }
 
   notes = notes.concat(note)
-  response.json()
+  response.json(note)
 })
 
 const PORT = 3003
