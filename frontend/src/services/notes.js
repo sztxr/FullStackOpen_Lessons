@@ -5,7 +5,7 @@ import axios from 'axios'
   This means we can leave out the part declaring the server.
   const baseUrl = 'https://infinite-fortress-16348.herokuapp.com/notes'
 */
-const baseUrl = '/notes'
+const baseUrl = '/api/notes'
 
 const getAll = () => {
   const request = axios.get(baseUrl)
