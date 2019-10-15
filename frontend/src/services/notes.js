@@ -1,5 +1,11 @@
 import axios from 'axios'
-const baseUrl = 'https://infinite-fortress-16348.herokuapp.com/notes'
+/*
+  Because in our situation both the frontend and the backend
+  are at the same address, we can declare baseUrl as a relative URL.
+  This means we can leave out the part declaring the server.
+  const baseUrl = 'https://infinite-fortress-16348.herokuapp.com/notes'
+*/
+const baseUrl = '/notes'
 
 const getAll = () => {
   const request = axios.get(baseUrl)
