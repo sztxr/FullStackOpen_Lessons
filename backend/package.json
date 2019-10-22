@@ -9,7 +9,8 @@
     "build:ui": "rm -rf build && cd ~/Code/FullStackOpen/lessons/frontend && npm run build --prod && cp -r build ~/Code/FullStackOpen/lessons/backend",
     "deploy": "git push heroku master",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",
-    "logs:prod": "heroku logs --tail"
+    "logs:prod": "heroku logs --tail",
+    "lint": "eslint . || exit 0"
   },
   "author": "sztxr",
   "license": "ISC",
@@ -20,6 +21,7 @@
     "mongoose": "^5.7.5"
   },
   "devDependencies": {
+    "eslint": "^6.5.1",
     "nodemon": "^1.19.3"
   }
 }
