@@ -14,6 +14,12 @@
 - `part3-3` &mdash; [**[c]**](https://fullstackopen.com/en/part3/saving_data_to_mongo_db) Saving data to MongoDB
 - `part3-4` &mdash; [**[d]**](https://fullstackopen.com/en/part3/validation_and_es_lint) Validation and ESLint
 
+### part4
+- `part4-1` &mdash; [**[a]**](https://fullstackopen.com/en/part4/structure_of_backend_application_introduction_to_testing) Structure of backend application, introduction to testing
+- `part4-2` &mdash; [**[b]**](https://fullstackopen.com/en/part4/testing_the_backend) Testing the backend
+- `part4-3` &mdash; [**[c]**](https://fullstackopen.com/en/part4/user_administration) User administration
+- `part4-4` &mdash; [**[d]**](https://fullstackopen.com/en/part4/token_authentication) Token authentication
+
 &nbsp;
 ---
 ---
