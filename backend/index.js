@@ -56,8 +56,8 @@ app.get('/', (request, response) => {
 app.get('/api/notes', (request, response) => {
   Note.find({}).then(notes => {
     response.json(notes.map(note => note.toJSON()))
-  })
-})
+  });
+});
 
 app.get('/api/notes/:id', (request, response, next) => {
   Note.findById(request.params.id)
@@ -65,7 +65,7 @@ app.get('/api/notes/:id', (request, response, next) => {
       if (note) {
         response.json(note.toJSON())
       } else {
-        response.status(404).end()
+        response.status(204).end()
       }
     })
     .catch(error => next(error))
@@ -101,15 +101,8 @@ app.delete('/api/notes/:id', (request, response, next) => {
 
 // POST
 
-app.post('/api/notes', (request, response) => {
+app.post('/api/notes', (request, response, next) => {
   const body = request.body
-
-  if (!body.content) {
-    // 400 bad request
-    return response.status(400).json({
-      error: 'content missing'
-    })
-  }
 
   const note = new Note({
     content: body.content,
@@ -117,9 +110,13 @@ app.post('/api/notes', (request, response) => {
     date: new Date(),
   })
 
-  note.save().then(savedNote => {
-    response.json(savedNote.toJSON())
-  })
+  note
+    .save()
+    .then(savedNote => savedNote.toJSON())
+    .then(savedAndFormattedNote => {
+      response.json(savedAndFormattedNote)
+    })
+    .catch(error => next(error))
 })
 
 // Middleware to catch non-existent routes
@@ -131,9 +128,13 @@ app.use(unknownEndpoint)
 // Middleware to catch errors
 const errorHandler = (error, request, response, next) => {
   console.error(error.message)
+
   if (error.name === 'CastError' && error.kind === 'ObjectId') {
     return response.status(400).send({ error: 'malformed id' })
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).json({ error: error.message })
   }
+
   next(error)
 }
 app.use(errorHandler)
