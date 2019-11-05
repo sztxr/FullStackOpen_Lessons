@@ -1,3 +1,15 @@
+/*
+  The app.js file that creates the actual application, takes the router into use as shown below:
+  const notesRouter = require('./controllers/notes')
+  app.use('/api/notes', notesRouter)
+
+  The router we defined earlier is used if the URL of the request starts with /api/notes.
+  For this reason, the notesRouter object must only define the relative parts of the routes,
+  i.e. the empty path / or just the parameter /:id.
+
+  The responsibility of establishing the connection to the database has been given to the app.js module.
+*/
+
 const config = require('./utils/config')
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -9,7 +21,7 @@ const mongoose = require('mongoose')
 
 console.log('connecting to', config.MONGODB_URI)
 
-mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true })
+mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('connected to MongoDB')
   })

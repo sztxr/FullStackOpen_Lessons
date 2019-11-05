@@ -1,9 +1,23 @@
 /*
+    The route handlers have also been moved into a dedicated module.
+    The event handlers of routes are commonly referred to as controllers,
+    and for this reason we have created a new controllers directory.
+    All of the routes related to notes are now in the notes.js module under the controllers directory.
+
     The router is in fact a middleware, that can be used for defining
     "related routes" in a single place, that is typically placed in its own module.
+
+    This is almost an exact copy-paste of our previous index.js file.
+
+    The module exports the router to be available for all consumers of the module.
+    It's worth noting that the paths in the route handlers have shortened. In the previous version, we had:
+    app.delete('/api/notes/:id', (request, response) => {
+
+    And in the current version, we have:
+    notesRouter.delete('/:id', (request, response) => {
 */
 const notesRouter = require('express').Router()
-const Note = require('./models/note')
+const Note = require('../models/note')
 
 // GET
 

@@ -24,6 +24,18 @@
 ---
 ---
 
+### File Structure
+- **`index.js`** only imports the actual application from the app.js file and then starts the application.
+- **`app.js`** creates the actual application, establishes the connection to the database.
+- **`controllers/notes.js`** contains all the event handlers of routes related to notes.
+- **`models/note.js`** only defines the Mongoose schema for notes.
+- **`utils/config.js`** handles the environment variables.
+- **`utils/middleware.js`** contains the custom middleware.
+
+&nbsp;
+---
+---
+
 ### HTTP
 
 | URL        | verb   | functionality 

@@ -1,3 +1,5 @@
+// Our custom middleware has been moved to a new utils/middleware.js module:
+
 const requestLogger = (request, response, next) => {
   console.log('Method:', request.method)
   console.log('Path:  ', request.path)
