@@ -10,7 +10,8 @@
     "deploy": "git push heroku master",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",
     "logs:prod": "heroku logs --tail",
-    "lint": "eslint . || exit 0"
+    "lint": "eslint . || exit 0",
+    "test": "jest --verbose"
   },
   "author": "sztxr",
   "license": "ISC",
@@ -22,6 +23,10 @@
   },
   "devDependencies": {
     "eslint": "^6.5.1",
+    "jest": "^24.9.0",
     "nodemon": "^1.19.3"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
