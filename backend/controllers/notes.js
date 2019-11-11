@@ -26,16 +26,28 @@ notesRouter.get('/', async (request, response) => {
   response.json(notes.map(note => note.toJSON()))
 })
 
-notesRouter.get('/:id', (request, response, next) => {
-  Note.findById(request.params.id)
-    .then(note => {
-      if (note) {
-        response.json(note.toJSON())
-      } else {
-        response.status(204).end()
-      }
-    })
-    .catch(error => next(error))
+notesRouter.get('/:id', async (request, response, next) => {
+  try {
+    const note = await Note.findById(request.params.id)
+    if (note) {
+      response.json(note.toJSON())
+    } else {
+      response.status(204).end()
+    }
+  }
+  catch (exception) {
+    next(exception)
+  }
+
+  // Note.findById(request.params.id)
+  //   .then(note => {
+  //     if (note) {
+  //       response.json(note.toJSON())
+  //     } else {
+  //       response.status(204).end()
+  //     }
+  //   })
+  //   .catch(error => next(error))
 })
 
 // POST
@@ -48,6 +60,13 @@ notesRouter.post('/', async (request, response, next) => {
     important: body.important || false,
     date: new Date(),
   })
+  try {
+    const savedNote = await note.save()
+    response.json(savedNote.toJSON())
+  }
+  catch (exception) {
+    next(exception)
+  }
 
   // note
   //   .save()
@@ -56,8 +75,6 @@ notesRouter.post('/', async (request, response, next) => {
   //     response.json(savedAndFormattedNote)
   //   })
   //   .catch(error => next(error))
-  const savedNote = await note.save()
-  response.json(savedNote.toJSON())
 })
 
 // PUT
@@ -79,13 +96,21 @@ notesRouter.put('/:id', (request, response, next) => {
 
 // DELETE
 
-notesRouter.delete('/:id', (request, response, next) => {
-  Note.findByIdAndRemove(request.params.id)
-    .then(() => {
-      // 204 no content
-      response.status(204).end()
-    })
-    .catch(error => next(error))
+notesRouter.delete('/:id', async (request, response, next) => {
+  try {
+    await Note.findByIdAndRemove(request.params.id)
+    response.status(204).end() // 204 No Content
+  }
+  catch (exception) {
+    next(exception)
+  }
+
+  // Note.findByIdAndRemove(request.params.id)
+  //   .then(() => {
+  //     // 204 no content
+  //     response.status(204).end()
+  //   })
+  //   .catch(error => next(error))
 })
 
 module.exports = notesRouter
