@@ -16,12 +16,13 @@ test('there are three notes', async () => {
   expect(response.body.length).toBe(3)
 })
 
-test('the first note is about HTTP methods', async () => {
+test('the first note is about HTTP methods', async (done) => {
   const response = await api.get('/api/notes')
   expect(response.body[0].content).toBe('HTML is Easy!')
+  done()
 })
 
 afterAll((done) => {
-  done()
   mongoose.connection.close()
+  done()
 })
