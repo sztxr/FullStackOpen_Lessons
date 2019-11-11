@@ -21,10 +21,9 @@ const Note = require('../models/note')
 
 // GET
 
-notesRouter.get('/', (request, response) => {
-  Note.find({}).then(notes => {
-    response.json(notes.map(note => note.toJSON()))
-  })
+notesRouter.get('/', async (request, response) => {
+  const notes = await Note.find({})
+  response.json(notes.map(note => note.toJSON()))
 })
 
 notesRouter.get('/:id', (request, response, next) => {
@@ -41,7 +40,7 @@ notesRouter.get('/:id', (request, response, next) => {
 
 // POST
 
-notesRouter.post('/', (request, response, next) => {
+notesRouter.post('/', async (request, response, next) => {
   const body = request.body
 
   const note = new Note({
@@ -50,13 +49,15 @@ notesRouter.post('/', (request, response, next) => {
     date: new Date(),
   })
 
-  note
-    .save()
-    .then(savedNote => savedNote.toJSON())
-    .then(savedAndFormattedNote => {
-      response.json(savedAndFormattedNote)
-    })
-    .catch(error => next(error))
+  // note
+  //   .save()
+  //   .then(savedNote => savedNote.toJSON())
+  //   .then(savedAndFormattedNote => {
+  //     response.json(savedAndFormattedNote)
+  //   })
+  //   .catch(error => next(error))
+  const savedNote = await note.save()
+  response.json(savedNote.toJSON())
 })
 
 // PUT
