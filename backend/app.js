@@ -16,6 +16,7 @@ const bodyParser = require('body-parser')
 const app = express()
 const cors = require('cors')
 const notesRouter = require('./controllers/notes')
+const usersRouter = require('./controllers/users')
 const middleware = require('./utils/middleware')
 const mongoose = require('mongoose')
 const logger = require('./utils/logger')
@@ -42,6 +43,7 @@ app.use(middleware.requestLogger)
     i.e. the empty path / or just the parameter /:id.
 */
 app.use('/api/notes', notesRouter)
+app.use('/api/users', usersRouter)
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
