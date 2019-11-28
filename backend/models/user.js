@@ -1,19 +1,17 @@
-// The note.js file under the models directory only defines the Mongoose schema for notes.
+// The user.js file under the models directory only defines the Mongoose schema for users.
 
 const mongoose = require('mongoose')
 
 const noteSchema = new mongoose.Schema({
-  content: {
-    type: String,
-    minlength: 5,
-    required: true
-  },
-  date: Date,
-  important: Boolean,
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }
+  username: String,
+  name: String,
+  passwordHash: String,
+  notes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Note'
+    }
+  ],
 })
 
 noteSchema.set('toJSON', {
@@ -21,6 +19,8 @@ noteSchema.set('toJSON', {
     returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
     delete returnedObject.__v
+    // the passwordHash should not be revealed
+    delete returnedObject.passwordHash
   }
 })
 
