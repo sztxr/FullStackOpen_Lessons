@@ -16,6 +16,7 @@ const App = (props) => {
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
 
+  // get all notes on db
   const hook = () => {
     noteService
       .getAll()
@@ -24,6 +25,18 @@ const App = (props) => {
       })
   }
   useEffect(hook, [])
+
+  // get user details from local storage
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      noteService.setToken(user.token)
+    }
+  }, [])
+  // The empty array as the parameter of the effect ensures that the effect
+  // is executed only when the component is rendered for the first time.
 
   const notesToShow = showAll
     ? notes
@@ -39,6 +52,11 @@ const App = (props) => {
       const user = await loginService.login({
         username, password,
       })
+
+      window.localStorage.setItem(
+        'loggedNoteAppUser', JSON.stringify(user)
+      )
+      // console.log(window.localStorage)
 
       noteService.setToken(user.token)
       setUser(user)
