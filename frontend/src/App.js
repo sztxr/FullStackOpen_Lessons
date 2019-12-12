@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
+import loginService from './services/login'
 import noteService from './services/notes'
+import LoginForm from './components/LoginForm'
+import NoteForm from './components/NoteForm'
 import Note from './components/Note'
 import Notification from './components/Notification'
 import Footer from './components/Footer'
-import loginService from './services/login'
 
 const App = (props) => {
   const [notes, setNotes] = useState([])
@@ -27,15 +29,15 @@ const App = (props) => {
     ? notes
     : notes.filter(note => note.important) // note.important === true
 
-  const handleLogin = async (event) => {
-    event.preventDefault()
+  const handleLogin = async (e) => {
+    e.preventDefault()
     // console.log('logging in with', username, password)
 
     // If the login is successful, the form fields are emptied and the server response
     // (including a token and the user details) is saved to the user field of the application's state.
     try {
       const user = await loginService.login({
-        username, password
+        username, password,
       })
 
       setUser(user)
@@ -57,43 +59,6 @@ const App = (props) => {
       note={note}
       toggleImportance={() => toggleImportanceOf(note.id)}
     />
-  )
-
-  const loginForm = () => (
-    // An object is given to the event handler as a parameter,
-    // and it destructures the field target from the object and save its value to the state.
-    <form onSubmit={handleLogin} className="form-login">
-      <div>
-        username
-        <input
-          type="text"
-          value={username}
-          name="Username"
-          onChange={({ target }) => setUsername(target.value)}
-        />
-      </div>
-      <div>
-        password
-        <input
-          type="text"
-          value={password}
-          name="Password"
-          onChange={({ target }) => setPassword(target.value)}
-        />
-      </div>
-      <button type="submit" className="btn btn-primary">Login</button>
-    </form>
-  )
-
-  const noteForm = () => (
-    <form onSubmit={addNote}>
-      <input
-        type="text"
-        value={newNote}
-        onChange={handleNoteChange}
-      />
-      <button className="btn btn-primary" type="submit">Add</button>
-    </form>
   )
 
   const handleNoteChange = (e) => {
@@ -152,14 +117,26 @@ const App = (props) => {
       <Notification message={errorMessage} />
 
       <h2>Login</h2>
-      
+
       {/* {user === null && loginForm()} */}
       {/* {user !== null && noteForm()} */}
       {user === null ?
-        loginForm() :
+        <LoginForm
+          handleLogin={handleLogin}
+          username={username}
+          password={password}
+          // An object is given to the event handler as a parameter,
+          // and it destructures the field target from the object and save its value to the state.
+          setUsername={({ target }) => setUsername(target.value)}
+          setPassword={({ target }) => setPassword(target.value)}
+        /> :
         <div>
           <p>{user.name} logged in</p>
-          {noteForm()}
+          <NoteForm
+            addNote={addNote}
+            data={newNote}
+            handleNoteChange={handleNoteChange}
+          />
         </div>
       }
 
@@ -174,7 +151,7 @@ const App = (props) => {
       <ul className='note-container'>
         {rows()}
       </ul>
-      
+
       <Footer />
     </div>
   )
