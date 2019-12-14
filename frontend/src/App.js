@@ -102,7 +102,7 @@ const App = (props) => {
   }
 
   const toggleImportanceOf = id => {
-    // array find method to find the note we want to modify, and assing it to the `note` variable
+    // array find method to find the note we want to modify, and assign it to the `note` variable
     const note = notes.find(n => n.id === id)
     // then we create a new object that is the exact copy of the note we saved,
     // apart from the important property, which we toggle to be the opposite of its previous value
