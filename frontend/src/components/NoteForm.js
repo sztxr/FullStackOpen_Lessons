@@ -4,7 +4,7 @@ const NoteForm = (props) => {
   const { addNote, data, handleNoteChange } = props
 
   return (
-    <form onSubmit={addNote}>
+    <form onSubmit={addNote} className="form-note">
       <input
         type="text"
         value={data}
