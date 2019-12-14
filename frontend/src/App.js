@@ -72,6 +72,12 @@ const App = (props) => {
     }
   }
 
+  const handleLogout = async () => {
+    window.localStorage.removeItem('loggedNoteAppUser')
+    setUser(null)
+  }
+
+
   const rows = () => notesToShow.map(note =>
     <Note
       key={note.id}
@@ -135,22 +141,26 @@ const App = (props) => {
 
       <Notification message={errorMessage} />
 
-      <h2>Login</h2>
-
       {/* {user === null && loginForm()} */}
       {/* {user !== null && noteForm()} */}
       {user === null ?
-        <LoginForm
-          handleLogin={handleLogin}
-          username={username}
-          password={password}
-          // An object is given to the event handler as a parameter,
-          // and it destructures the field target from the object and save its value to the state.
-          setUsername={({ target }) => setUsername(target.value)}
-          setPassword={({ target }) => setPassword(target.value)}
-        /> :
         <div>
-          <p>{user.name} logged in</p>
+          <h2>Login</h2>
+          <LoginForm
+            handleLogin={handleLogin}
+            username={username}
+            password={password}
+            // An object is given to the event handler as a parameter,
+            // and it destructures the field target from the object and save its value to the state.
+            setUsername={({ target }) => setUsername(target.value)}
+            setPassword={({ target }) => setPassword(target.value)}
+          />
+        </div> :
+        <div>
+          <div className="user">
+            {user.name} logged in
+            <button onClick={handleLogout} className="btn btn-secondary">logout</button>
+          </div>
           <NoteForm
             addNote={addNote}
             data={newNote}
@@ -159,17 +169,14 @@ const App = (props) => {
         </div>
       }
 
-      <br />
-
-      <div>
+      <div className="wrapper">
         <button className='btn btn-primary' onClick={() => setShowAll(!showAll)}>
           show {showAll ? 'important' : 'all'}
         </button>
+        <ul className='note-container'>
+          {rows()}
+        </ul>
       </div>
-
-      <ul className='note-container'>
-        {rows()}
-      </ul>
 
       <Footer />
     </div>
