@@ -1,6 +1,7 @@
+/* Global */
 :root {
   --margin-sides: 20px;
-  --primary-color: #15202B;
+  --primary-color: #15202b;
   --accent-color-primary: rgb(88, 167, 174);
   --accent-color-secondary: rgb(37, 70, 73);
   --error-color: rgb(185, 40, 52);
@@ -9,19 +10,17 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: 0 var(--margin-sides);
-  background-color: var(--primary-color); 
-  color: var(--text-color); 
+  background-color: var(--primary-color);
+  color: var(--text-color);
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 h1,
@@ -33,6 +32,57 @@ h1 {
   margin-bottom: 5px;
 }
 
+input {
+  box-shadow: none;
+  border: unset;
+  outline: none;
+
+  border-radius: 5px;
+  padding: 5px;
+}
+
+/* Notifications */
+.error {
+  color: var(--text-color);
+  background-color: var(--error-color);
+  font-size: 16px;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 25px;
+}
+
+/* Buttons */
+.btn {
+  box-shadow: none;
+  border: unset;
+  outline: none;
+
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-left: 10px;
+
+  background-color: var(--btn-color);
+  color: white;
+  font-size: 10px;
+  font-weight: bolder;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  cursor: pointer;
+}
+
+.btn-primary {
+  --btn-color: var(--accent-color-primary);
+}
+.wrapper .btn-primary {
+  margin-left: 0;
+}
+
+.btn-secondary {
+  --btn-color: var(--accent-color-secondary);
+}
+
+/* Notes */
 .wrapper {
   margin-top: 10px;
   margin-left: var(--margin-sides);
@@ -48,63 +98,47 @@ h1 {
   font-size: 15px;
 }
 
-.btn {
-  box-shadow: none;
-  border: unset;
-  outline: none;
-
-  border-radius: 5px;
-  padding: 5px 10px;
-  margin-left: 10px;
-
-  color: white;
-  font-size: 10px;
-  font-weight: bolder;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.btn-primary {
-  background-color: var(--accent-color-primary);
-}
-.wrapper .btn-primary {
-  margin-left: 0;
-}
-
-.btn-secondary {
-  background-color: var(--accent-color-secondary);
-}
-
-input {
-  box-shadow: none;
-  border: unset;
-  outline: none;
-
-  border-radius: 5px;
-  padding: 5px;
-}
-
-.error {
-  color: var(--text-color);
-  background-color: var(--error-color);
-  font-size: 16px;
-  border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 25px;
-}
-
+/* Login */
 .user {
   margin: 0 0 30px;
+}
+
+.login-container {
+  width: 555px;
+
+  padding: 10px 20px;
+  margin-bottom: 30px;
+
+  border-radius: 8px;
+  background-color: #fff;
+
+  color: var(--accent-color-secondary);
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.login-header {
+  display: flex;
+  align-items: center;
+}
+.login-header h2 {
+  margin: 10px 0;
+  display: inline-block;
 }
 
 /* Forms */
 .form-login div {
   display: inline-block;
+  font-size: 11px;
+  font-weight: bold;
+  margin: 3px 0;
 }
 
 .form-login input {
+  width: 150px;
   margin-right: 1rem;
-  margin-left: .3rem;
+  margin-left: 0.3rem;
+  border: 1px solid var(--accent-color-primary)
 }
 
 .form-login .btn {
@@ -113,4 +147,11 @@ input {
 
 .form-note {
   margin-left: var(--margin-sides);
+}
+
+/* Responsive */
+@media screen and (max-width: 636px) {
+  .login-container {
+    width: 92%;
+  }
 }

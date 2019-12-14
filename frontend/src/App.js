@@ -15,6 +15,7 @@ const App = (props) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
+  const [loginVisible, setLoginVisible] = useState(false)
 
   // get all notes on db
   const hook = () => {
@@ -77,6 +78,31 @@ const App = (props) => {
     setUser(null)
   }
 
+  const loginForm = () => {
+    const hideWhenVisible = { display: loginVisible ? 'none' : '' }
+    const showWhenVisible = { display: loginVisible ? '' : 'none' }
+
+    return (
+      <div className="login-container">
+        <div style={hideWhenVisible}>
+          <button onClick={() => setLoginVisible(true)} className="btn btn-primary">Log in</button>
+        </div>
+        <div style={showWhenVisible}>
+          <div className="login-header">
+            <h2>Login</h2>
+            <button onClick={() => setLoginVisible(false)} className="btn btn-secondary">Cancel</button>
+          </div>
+          <LoginForm
+            username={username}
+            password={password}
+            handleUsernameChange={({ target }) => setUsername(target.value)}
+            handlePasswordChange={({ target }) => setPassword(target.value)}
+            handleSubmit={handleLogin}
+          />
+        </div>
+      </div>
+    )
+  }
 
   const rows = () => notesToShow.map(note =>
     <Note
@@ -85,11 +111,6 @@ const App = (props) => {
       toggleImportance={() => toggleImportanceOf(note.id)}
     />
   )
-
-  const handleNoteChange = (e) => {
-    // console.log(e.target.value)
-    setNewNote(e.target.value)
-  }
 
   const addNote = (e) => {
     e.preventDefault()
@@ -105,6 +126,11 @@ const App = (props) => {
         setNotes([...notes, returnedNote])
         setNewNote('')
       })
+  }
+
+  const handleNoteChange = (e) => {
+    // console.log(e.target.value)
+    setNewNote(e.target.value)
   }
 
   const toggleImportanceOf = id => {
@@ -132,7 +158,6 @@ const App = (props) => {
         //return an array with only the items from the list for which n.id !== id return true for
         setNotes(notes.filter(n => n.id !== id))
       })
-
   }
 
   return (
@@ -144,22 +169,11 @@ const App = (props) => {
       {/* {user === null && loginForm()} */}
       {/* {user !== null && noteForm()} */}
       {user === null ?
-        <div>
-          <h2>Login</h2>
-          <LoginForm
-            handleLogin={handleLogin}
-            username={username}
-            password={password}
-            // An object is given to the event handler as a parameter,
-            // and it destructures the field target from the object and save its value to the state.
-            setUsername={({ target }) => setUsername(target.value)}
-            setPassword={({ target }) => setPassword(target.value)}
-          />
-        </div> :
+        loginForm() :
         <div>
           <div className="user">
             {user.name} logged in
-            <button onClick={handleLogout} className="btn btn-secondary">logout</button>
+            <button onClick={handleLogout} className="btn btn-secondary">log out</button>
           </div>
           <NoteForm
             addNote={addNote}
