@@ -1,16 +1,14 @@
 import React from 'react'
 
-const NoteForm = (props) => {
-  const { addNote, data, handleNoteChange } = props
-
+const NoteForm = ({ handleSubmit, data, handleNoteChange }) => {
   return (
-    <form onSubmit={addNote} className="form-note">
+    <form onSubmit={handleSubmit} className="form-note">
       <input
         type="text"
         value={data}
         onChange={handleNoteChange}
       />
-      <button className="btn btn-primary" type="submit">Add</button>
+      <button className="btn btn-primary" type="submit">Save</button>
     </form>
   )
 }

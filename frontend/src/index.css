@@ -39,6 +39,8 @@ input {
 
   border-radius: 5px;
   padding: 5px;
+
+  background-color: rgb(232, 240, 254);
 }
 
 /* Notifications */
@@ -98,12 +100,12 @@ input {
   font-size: 15px;
 }
 
-/* Login */
+/* Forms container */
 .user {
   margin: 0 0 30px;
 }
 
-.login-container {
+.form-container {
   width: 555px;
 
   padding: 10px 20px;
@@ -117,11 +119,11 @@ input {
   text-transform: uppercase;
 }
 
-.login-header {
+.form-header {
   display: flex;
   align-items: center;
 }
-.login-header h2 {
+.form-header h2 {
   margin: 10px 0;
   display: inline-block;
 }
@@ -146,12 +148,17 @@ input {
 }
 
 .form-note {
-  margin-left: var(--margin-sides);
+  margin-left: 0;
+}
+
+.form-note input {
+  width: 86%;
+  border: 1px solid var(--accent-color-primary);
 }
 
 /* Responsive */
 @media screen and (max-width: 636px) {
-  .login-container {
+  .form-container {
     width: 92%;
   }
 }
