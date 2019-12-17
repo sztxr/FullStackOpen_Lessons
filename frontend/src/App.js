@@ -8,7 +8,7 @@ import Notification from './components/Notification'
 import Footer from './components/Footer'
 import Togglable from './components/Togglable'
 
-const App = (props) => {
+const App = () => {
   const [notes, setNotes] = useState([])
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
@@ -159,7 +159,7 @@ const App = (props) => {
         // if the condition is false, then the note object returned by the server is added to the array instead.
         setNotes(notes.map(note => note.id !== id ? note : returnedNote))
       })
-      .catch(err => {
+      .catch(() => {
         setErrorMessage(`The note '${note.content}' was already deleted from server`)
         setTimeout(() => {
           setErrorMessage(null)
