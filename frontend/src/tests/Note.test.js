@@ -13,7 +13,20 @@ test('renders content', () => {
 
   const component = render(<Note note={note} />)
 
+  // method 1
   expect(component.container).toHaveTextContent(
+    'Component testing is done with react-testing-library'
+  )
+
+  // method 2
+  const element = component.getByText(
+    'Component testing is done with react-testing-library'
+  )
+  expect(element).toBeDefined()
+
+  // method 3
+  const div = component.container.querySelector('.note')
+  expect(div).toHaveTextContent(
     'Component testing is done with react-testing-library'
   )
 })
