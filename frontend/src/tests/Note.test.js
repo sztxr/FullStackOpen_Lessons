@@ -1,7 +1,9 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render } from '@testing-library/react'
-import Note from './Note'
+import Note from '../components/Note'
+
+// to run tests normally `CI=true npm test`
 
 test('renders content', () => {
   const note = {
