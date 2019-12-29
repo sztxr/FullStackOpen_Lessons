@@ -13,6 +13,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:coverage": "CI=true npm test -- --coverage",
     "eject": "react-scripts eject",
     "server": "json-server -p3001 db.json",
     "lint": "eslint ."
