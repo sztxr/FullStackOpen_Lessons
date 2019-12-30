@@ -1,5 +1,9 @@
 # Full Stack Open 2019 &mdash; Lessons Exercise
-&mdash; **Notes App** &ndash; **Frontend & Backend code**
+## &mdash; **Notes App** &ndash; **[Frontend](https://github.com/sztxr/FullStackOpen_Lessons/tree/master/frontend) & [Backend](https://github.com/sztxr/FullStackOpen_Lessons/tree/master/backend) code**
+
+## &mdash; **Redux Exercises** (part6):
+  - ## [**Counter App with Redux**]()
+  - ## [**Notes App with Redux**]()
 
 ### part2
 - `part2-1` &mdash; [**[a]**](https://fullstackopen.com/en/part2/rendering_a_collection_modules) Rendering a collection, modules
@@ -21,10 +25,15 @@
 - `part4-4` &mdash; [**[d]**](https://fullstackopen.com/en/part4/token_authentication) Token authentication
 
 ### part5
-- `part5-1` &mdash; [**[a]**](https://fullstackopen.com/en/part5/login_in_frontend)Login in frontend
-- `part5-2` &mdash; [**[b]**](https://fullstackopen.com/en/part5/props_children_and_proptypes)props.children and proptypes
-- `part5-3` &mdash; [**[c]**](https://fullstackopen.com/en/part5/testing_react_apps)Testing React apps
-- `part5-4` &mdash; [**[d]**](https://fullstackopen.com/en/part5/custom_hooks)Custom hooks
+- `part5-1` &mdash; [**[a]**](https://fullstackopen.com/en/part5/login_in_frontend) Login in frontend
+- `part5-2` &mdash; [**[b]**](https://fullstackopen.com/en/part5/props_children_and_proptypes) props.children and proptypes
+- `part5-3` &mdash; [**[c]**](https://fullstackopen.com/en/part5/testing_react_apps) Testing React apps
+- `part5-4` &mdash; [**[d]**](https://fullstackopen.com/en/part5/custom_hooks) Custom hooks
+
+### part6
+- `part6-1` &mdash; [**[a]**](https://fullstackopen.com/en/part6/flux_architecture_and_redux) Flux-architecture and Redux
+- `part6-2` &mdash; [**[b]**](https://fullstackopen.com/en/part6/many_reducers_connect) Many reducers, connect
+- `part6-3` &mdash; [**[c]**](https://fullstackopen.com/en/part6/communicating_with_server_in_a_redux_application) Communicating with server in a redux application
 
 &nbsp;
 ---
