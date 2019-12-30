@@ -1,9 +1,9 @@
 # Full Stack Open 2019 &mdash; Lessons Exercise
-## &mdash; **Notes App** &ndash; **[Frontend](https://github.com/sztxr/FullStackOpen_Lessons/tree/master/frontend) & [Backend](https://github.com/sztxr/FullStackOpen_Lessons/tree/master/backend) code**
+### &mdash; **Notes App** &ndash; **[Frontend](https://github.com/sztxr/FullStackOpen_Lessons/tree/master/frontend) & [Backend](https://github.com/sztxr/FullStackOpen_Lessons/tree/master/backend) code**
 
-## &mdash; **Redux Exercises** (part6):
-  - ## [**Counter App with Redux**]()
-  - ## [**Notes App with Redux**]()
+### &mdash; **Redux Exercises** (part6):
+  - ### [**Counter App with Redux**]()
+  - ### [**Notes App with Redux**]()
 
 ### part2
 - `part2-1` &mdash; [**[a]**](https://fullstackopen.com/en/part2/rendering_a_collection_modules) Rendering a collection, modules
