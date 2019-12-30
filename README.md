@@ -3,7 +3,7 @@
 
 ### &mdash; **Redux Exercises** (part6):
   - ### [**Counter App with Redux**]()
-  - ### [**Notes App with Redux**]()
+  - ### [**Simplified Notes App with Redux**]()
 
 &nbsp;
 ---
