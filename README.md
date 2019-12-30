@@ -5,6 +5,9 @@
   - ### [**Counter App with Redux**]()
   - ### [**Notes App with Redux**]()
 
+&nbsp;
+---
+
 ### part2
 - `part2-1` &mdash; [**[a]**](https://fullstackopen.com/en/part2/rendering_a_collection_modules) Rendering a collection, modules
 - `part2-2` &mdash; [**[b]**](https://fullstackopen.com/en/part2/forms) Forms
