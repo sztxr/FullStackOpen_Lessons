@@ -26,33 +26,41 @@ store.dispatch({
 
 const generateId = () => Number((Math.random() * 1000000).toFixed(0))
 
+const createNote = content => {
+  return {
+    type: 'NEW_NOTE',
+    data: {
+      content,
+      important: false,
+      id: generateId()
+    }
+  }
+}
+
+const toggleImportanceOf = id => {
+  return {
+    type: 'TOGGLE_IMPORTANCE',
+    data: { id }
+  }
+}
+
 function App() {
   const addNote = e => {
     e.preventDefault()
     // because the field has a name, we can access the content via the event object event.target.note.value
     const content = e.target.note.value
-    store.dispatch({
-      type: 'NEW_NOTE',
-      data: {
-        content,
-        important: false,
-        id: generateId()
-      }
-    })
+    store.dispatch(createNote(content))
     e.target.note.value = ''
   }
 
   const toggleImportance = id => () => {
-    store.dispatch({
-      type: 'TOGGLE_IMPORTANCE',
-      data: { id }
-    })
+    store.dispatch(toggleImportanceOf(id))
   }
 
   return (
     <div>
       <form onSubmit={addNote}>
-        <input name="note"/>
+        <input name="note" />
         <button type="submit">add</button>
       </form>
 
