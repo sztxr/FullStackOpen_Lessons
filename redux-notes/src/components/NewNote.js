@@ -22,19 +22,25 @@ const NewNote = props => {
     </form>
   )
 }
-/*
-    { createNote } same as: 
-
-    const mapDispatchToProps = {
-      createNote,
-    }
-    export default connect(
-      null,
-      mapDispatchToProps
-    )(NewNote)
-*/
 
 export default connect(
   null,
   { createNote }
 )(NewNote)
+
+/*
+{ createNote } same as:
+
+const mapDispatchToProps = dispatch => {
+  return {
+    createNote: value => {
+      dispatch(createNote(value))
+    },
+  }
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(NewNote)
+*/
