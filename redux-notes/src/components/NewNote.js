@@ -1,20 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { createNote } from '../reducers/noteReducer'
-import noteService from '../services/notes'
 
 const NewNote = props => {
-  // const { createNote } = props
-  // console.log(createNote)
-  // console.log(props.createNote)
-
   const addNote = async (e) => {
     e.preventDefault()
     // because the field has a name, we can access the content via the event object event.target.note.value
     const content = e.target.note.value
     e.target.note.value = ''
-    const newNote = await noteService.createNew(content)
-    props.createNote(newNote)
+    props.createNote(content)
   }
 
   return (
