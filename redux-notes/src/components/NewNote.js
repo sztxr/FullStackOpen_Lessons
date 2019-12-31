@@ -4,8 +4,8 @@ import { createNote } from '../reducers/noteReducer'
 
 const NewNote = props => {
   // const { createNote } = props
-  console.log(createNote)
-  console.log(props.createNote)
+  // console.log(createNote)
+  // console.log(props.createNote)
 
   const addNote = e => {
     e.preventDefault()
