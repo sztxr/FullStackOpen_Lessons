@@ -5,28 +5,47 @@ import {
 } from 'react-router-dom'
 
 const Home = () => (
-  <div> <h2>TKTL notes app</h2> </div>
+  <div>
+    <h2>Notes app</h2>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates aliquid veritatis esse quo laudantium similique molestiae quos aperiam! Rerum vel praesentium explicabo sequi incidunt consectetur possimus quo nam ipsam magni!</p>
+  </div>
 )
 
-const Notes = (props) => (
+const Notes = ({ notes }) => (
   <div>
     <h2>Notes</h2>
     <ul>
-      {props.notes.map(note =>
+      {notes.map(note =>
         <li key={note.id}>
-          {note.content}
+          <Link to={`/notes/${note.id}`}>{note.content}</Link>
         </li>
       )}
     </ul>
   </div>
 )
 
+const Note = ({ note }) => {
+  return (
+    <div>
+      <h2>{note.content}</h2>
+      <div>{note.user}</div>
+      <div><strong>{note.important ? 'important' : ''}</strong></div>
+    </div>
+  )
+}
+
 const Users = () => (
-  <div> <h2>Users</h2> </div>
+  <div>
+    <h2>Notes app</h2>
+    <ul>
+      <li>Matti Luukkainen</li>
+      <li>Juha Tauriainen</li>
+      <li>Arto Hellas</li>
+    </ul>
+  </div>
 )
 
 const App = () => {
-  const [page, setPage] = useState('home')
   const [user, setUser] = useState(null)
   const [notes, setNotes] = useState([
     {
@@ -49,20 +68,7 @@ const App = () => {
     }
   ])
 
-  const toPage = (page) => (event) => {
-    event.preventDefault()
-    setPage(page)
-  }
-
-  const content = () => {
-    if (page === 'home') {
-      return <Home />
-    } else if (page === 'notes') {
-      return <Notes notes={notes} />
-    } else if (page === 'users') {
-      return <Users />
-    }
-  }
+  const noteById = (id) => notes.find(note => note.id === Number(id))
 
   const padding = {
     padding: 5
@@ -72,14 +78,20 @@ const App = () => {
     <div>
       <Router>
         <div>
+
           <div>
             <Link style={padding} to='/'>home</Link>
             <Link style={padding} to='/notes'>notes</Link>
             <Link style={padding} to='/users'>users</Link>
           </div>
+
           <Route exact path='/' render={() => <Home />} />
-          <Route path='/notes' render={() => <Notes notes={notes} />} />
-          <Route path='/users' render={() => <Users />} />
+          <Route exact path='/notes' render={() => <Notes notes={notes} />} />
+          <Route exact path='/notes/:id' render={({ match }) =>
+            <Note note={noteById(match.params.id)} />}
+          />
+          <Route exact path='/users' render={() => <Users />} />
+
         </div>
       </Router>
     </div>
