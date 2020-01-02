@@ -5,6 +5,8 @@
   - ### [**Counter App with Redux**]()
   - ### [**Simplified Notes App with Redux**]()
 
+### &mdash; **React-router** (part7) &ndash; **Routed Notes App** *(no redux)* &ndash; **[Frontend]()**
+
 &nbsp;
 ---
 
@@ -37,6 +39,14 @@
 - `part6-1` &mdash; [**[a]**](https://fullstackopen.com/en/part6/flux_architecture_and_redux) Flux-architecture and Redux
 - `part6-2` &mdash; [**[b]**](https://fullstackopen.com/en/part6/many_reducers_connect) Many reducers, connect
 - `part6-3` &mdash; [**[c]**](https://fullstackopen.com/en/part6/communicating_with_server_in_a_redux_application) Communicating with server in a redux application
+
+### part7
+- `part7-1` &mdash; [**[a]**](https://fullstackopen.com/en/part7/react_router) React-router
+- `part7-2` &mdash; [**[b]**](https://fullstackopen.com/en/part7/more_about_styles) More about styles
+- `part7-3` &mdash; [**[c]**](https://fullstackopen.com/en/part7/webpack) Webpack
+- `part7-4` &mdash; [**[d]**](https://fullstackopen.com/en/part7/class_components_e_2_e_testing) Class components, E2E-testing
+- `part7-5` &mdash; [**[e]**](https://fullstackopen.com/en/part7/miscellaneous) Miscellaneous
+- `part7-6` &mdash; [**[f]**](https://fullstackopen.com/en/part7/exercises_extending_the_bloglist) Exercises: extending the bloglist
 
 &nbsp;
 ---
