@@ -36,7 +36,7 @@ const Note = ({ note }) => {
 
 const Users = () => (
   <div>
-    <h2>Notes app</h2>
+    <h2>Users</h2>
     <ul>
       <li>Matti Luukkainen</li>
       <li>Juha Tauriainen</li>
@@ -45,8 +45,28 @@ const Users = () => (
   </div>
 )
 
+let Login = props => {
+  const onSubmit = e => {
+    e.preventDefault()
+    props.onLogin('eszter')
+    props.history.push('/')
+  }
+
+  return (
+    <div>
+      <h2>Login</h2>
+      <form onSubmit={onSubmit}>
+        <div>username: <input /></div>
+        <div>password: <input /></div>
+        <button type="submit">login</button>
+      </form>
+    </div>
+  )
+}
+
+Login = withRouter(Login)
+
 const App = () => {
-  const [user, setUser] = useState(null)
   const [notes, setNotes] = useState([
     {
       id: 1,
@@ -68,32 +88,12 @@ const App = () => {
     }
   ])
 
+  const [user, setUser] = useState(null)
+  const login = user => setUser(user)
+
   const noteById = (id) => notes.find(note => note.id === Number(id))
 
-  const padding = {
-    padding: 5
-  }
-
-  const LoginNoHistory = props => {
-    const onSubmit = e => {
-      e.preventDefault()
-      props.onLogin('mluukkai')
-      props.history.push('/')
-    }
-
-    return (
-      <div>
-        <h2>Login</h2>
-        <form onSubmit={onSubmit}>
-          <div>username: <input /></div>
-          <div>password: <input /></div>
-          <button type="submit">login</button>
-        </form>
-      </div>
-    )
-  }
-
-  const Login = withRouter(LoginNoHistory)
+  const padding = { padding: 5 }
 
   return (
     <div>
@@ -101,24 +101,42 @@ const App = () => {
         <div>
 
           <div>
-            <Link style={padding} to='/'>home</Link>
-            <Link style={padding} to='/notes'>notes</Link>
-            <Link style={padding} to='/users'>users</Link>
             {user
-              ? <em>{user} logged in</em>
+              ? <>
+                  <Link style={padding} to='/'>home</Link>
+                  <Link style={padding} to='/notes'>notes</Link>
+                  <Link style={padding} to='/users'>users</Link>
+                  <em>{user} logged in</em>
+                </>
               : <Link to='/login'>login</Link>
             }
           </div>
 
-          <Route exact path='/' render={() => <Home />} />
-          <Route exact path='/notes' render={() => <Notes notes={notes} />} />
+          <Route exact path='/' render={() =>
+            !user
+              ? <><Home /> <Login onLogin={login} /></>
+              : <Home />
+          } />
+          <Route exact path='/notes' render={() =>
+            user ? <Notes notes={notes} /> : <Redirect to='/login' />
+          } />
           <Route exact path='/notes/:id' render={({ match }) =>
-            <Note note={noteById(match.params.id)} />}
-          />
-          <Route exact path='/users' render={() => <Users />} />
+            user ? <Note note={noteById(match.params.id)} /> : <Redirect to='/login' />
+          } />
+          <Route exact path='/users' render={() =>
+            user ? <Users /> : <Redirect to='/login' />
+          } />
+          <Route path='/login' render={() => {
+            if (!user) return (<Login onLogin={login} />)
+          }} />
 
         </div>
       </Router>
+
+      <div>
+        <br />
+        <em>Note app, Department of Computer Science 2019</em>
+      </div>
     </div>
   )
 }
