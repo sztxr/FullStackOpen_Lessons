@@ -74,6 +74,27 @@ const App = () => {
     padding: 5
   }
 
+  const LoginNoHistory = props => {
+    const onSubmit = e => {
+      e.preventDefault()
+      props.onLogin('mluukkai')
+      props.history.push('/')
+    }
+
+    return (
+      <div>
+        <h2>Login</h2>
+        <form onSubmit={onSubmit}>
+          <div>username: <input /></div>
+          <div>password: <input /></div>
+          <button type="submit">login</button>
+        </form>
+      </div>
+    )
+  }
+
+  const Login = withRouter(LoginNoHistory)
+
   return (
     <div>
       <Router>
@@ -83,6 +104,10 @@ const App = () => {
             <Link style={padding} to='/'>home</Link>
             <Link style={padding} to='/notes'>notes</Link>
             <Link style={padding} to='/users'>users</Link>
+            {user
+              ? <em>{user} logged in</em>
+              : <Link to='/login'>login</Link>
+            }
           </div>
 
           <Route exact path='/' render={() => <Home />} />
