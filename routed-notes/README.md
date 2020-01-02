@@ -1,3 +1,8 @@
+# Full Stack Open 2019 &mdash; Notes App Exercise
+### Code for a simplified version of the **Notes App**, with `react-router`
+
+&nbsp;
+---
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
