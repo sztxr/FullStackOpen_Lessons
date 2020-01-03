@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Route, Link, Redirect, withRouter
 } from 'react-router-dom'
+import { Container, Table } from 'semantic-ui-react'
 
 const Home = () => (
   <div>
@@ -14,13 +15,22 @@ const Home = () => (
 const Notes = ({ notes }) => (
   <div>
     <h2>Notes</h2>
-    <ul>
-      {notes.map(note =>
-        <li key={note.id}>
-          <Link to={`/notes/${note.id}`}>{note.content}</Link>
-        </li>
-      )}
-    </ul>
+    <Table striped celled>
+      <Table.Body>
+        {notes.map(note =>
+          <Table.Row key={note.id}>
+            <Table.Cell>
+              <Link to={`/notes/${note.id}`}>
+                {note.content}
+              </Link>
+            </Table.Cell>
+            <Table.Cell>
+              {note.user}
+            </Table.Cell>
+          </Table.Row>
+        )}
+      </Table.Body>
+    </Table>
   </div>
 )
 
@@ -96,7 +106,7 @@ const App = () => {
   const padding = { padding: 5 }
 
   return (
-    <div className="container">
+    <Container>
       <Router>
         <div>
 
@@ -137,7 +147,7 @@ const App = () => {
         <br />
         <em>Note app, Department of Computer Science 2019</em>
       </div>
-    </div>
+    </Container>
   )
 }
 
