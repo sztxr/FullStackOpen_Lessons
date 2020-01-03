@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Route, Link, Redirect, withRouter
 } from 'react-router-dom'
-import { Container, Table, Form, Button, Message } from 'semantic-ui-react'
+import { Container, Table, Form, Button, Message, Menu } from 'semantic-ui-react'
 
 const Home = () => (
   <div>
@@ -66,16 +66,16 @@ let Login = props => {
     <div>
       <h2>Login</h2>
       <Form onSubmit={onSubmit}>
-      <Form.Field>
-        <label>username</label>
-        <input name='username' />
-      </Form.Field>
-      <Form.Field>
-        <label>password</label>
-        <input type='password' />
-      </Form.Field>
-      <Button type='submit'>login</Button>
-    </Form>
+        <Form.Field>
+          <label>username</label>
+          <input name='username' />
+        </Form.Field>
+        <Form.Field>
+          <label>password</label>
+          <input type='password' />
+        </Form.Field>
+        <Button type='submit'>login</Button>
+      </Form>
     </div>
   )
 }
@@ -110,7 +110,7 @@ const App = () => {
   const login = user => {
     setUser(user)
     setMessage(`welcome ${user}`)
-    setTimeout(() => {setMessage(null)}, 5000)
+    setTimeout(() => { setMessage(null) }, 5000)
   }
 
   const noteById = (id) => notes.find(note => note.id === Number(id))
@@ -123,15 +123,23 @@ const App = () => {
         <div>
 
           <div>
-            {user
-              ? <>
-                <Link style={padding} to='/'>home</Link>
-                <Link style={padding} to='/notes'>notes</Link>
-                <Link style={padding} to='/users'>users</Link>
-                <em>{user} logged in</em>
-              </>
-              : <Link to='/login'>login</Link>
-            }
+            <Menu inverted>
+              <Menu.Item link>
+                <Link to="/">home</Link>
+              </Menu.Item>
+              <Menu.Item link>
+                <Link to="/notes">notes</Link>
+              </Menu.Item>
+              <Menu.Item link>
+                <Link to="/users">users</Link>
+              </Menu.Item>
+              <Menu.Item link>
+                {user
+                  ? <em>{user} logged in</em>
+                  : <Link to="/login">login</Link>
+                }
+              </Menu.Item>
+            </Menu>
           </div>
 
           {(message &&
