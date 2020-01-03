@@ -1,3 +1,7 @@
+import React from 'react'
+
 const App = () => {
-  return null
+  <div>Hello Webpack</div>
 }
+
+export default App
