@@ -2,10 +2,13 @@
 ### &mdash; **Notes App** &ndash; **[Frontend](https://github.com/sztxr/FullStackOpen_Lessons/tree/master/frontend) & [Backend](https://github.com/sztxr/FullStackOpen_Lessons/tree/master/backend) code**
 
 ### &mdash; **Redux Exercises** (part6):
-  - ### [**Counter App with Redux**]()
-  - ### [**Simplified Notes App with Redux**]()
+  - ### [**Counter App with Redux**](https://github.com/sztxr/FullStackOpen_Lessons/tree/112ffcf4674f5cc16c0e9bcf599972f69e1a0ecf/redux-counter)
+  - ### [**Simplified Notes App with Redux**](https://github.com/sztxr/FullStackOpen_Lessons/tree/112ffcf4674f5cc16c0e9bcf599972f69e1a0ecf/redux-notes)
 
-### &mdash; **React-router** (part7) &ndash; **Routed Notes App** *(no redux)* &ndash; **[Frontend]()**
+### &mdash; **React-router** (part7):
+  - ### [**Routed Notes App**](https://github.com/sztxr/FullStackOpen_Lessons/tree/112ffcf4674f5cc16c0e9bcf599972f69e1a0ecf/routed-notes) *(no redux)* + Bootstrap
+  - ### [**Routed Notes App**](https://github.com/sztxr/FullStackOpen_Lessons/tree/112ffcf4674f5cc16c0e9bcf599972f69e1a0ecf/routed-notes-semantic) *(no redux)* + Semantic UI
+  - ### [**Routed Notes App**]() *(no redux)* + Styled Components
 
 &nbsp;
 ---
