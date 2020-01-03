@@ -1,4 +1,6 @@
 # Full Stack Open 2019 &mdash; Lessons Exercise
+
+### &mdash; **React Exercises** (part2-5):
 #### &mdash; **Notes App** &ndash; **[Frontend](https://github.com/sztxr/FullStackOpen_Lessons/tree/master/frontend) & [Backend](https://github.com/sztxr/FullStackOpen_Lessons/tree/master/backend) code**
 
 ### &mdash; **Redux Exercises** (part6):
