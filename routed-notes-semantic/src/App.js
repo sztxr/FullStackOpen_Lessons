@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Route, Link, Redirect, withRouter
 } from 'react-router-dom'
-import { Container, Table } from 'semantic-ui-react'
+import { Container, Table, Form, Button } from 'semantic-ui-react'
 
 const Home = () => (
   <div>
@@ -65,11 +65,17 @@ let Login = props => {
   return (
     <div>
       <h2>Login</h2>
-      <form onSubmit={onSubmit}>
-        <div>username: <input /></div>
-        <div>password: <input /></div>
-        <button type="submit">login</button>
-      </form>
+      <Form onSubmit={onSubmit}>
+      <Form.Field>
+        <label>username</label>
+        <input name='username' />
+      </Form.Field>
+      <Form.Field>
+        <label>password</label>
+        <input type='password' />
+      </Form.Field>
+      <Button type='submit'>login</Button>
+    </Form>
     </div>
   )
 }
