@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Route, Link, Redirect, withRouter
 } from 'react-router-dom'
-import { Container, Table, Form, Button } from 'semantic-ui-react'
+import { Container, Table, Form, Button, Message } from 'semantic-ui-react'
 
 const Home = () => (
   <div>
@@ -105,7 +105,13 @@ const App = () => {
   ])
 
   const [user, setUser] = useState(null)
-  const login = user => setUser(user)
+  const [message, setMessage] = useState(null)
+
+  const login = user => {
+    setUser(user)
+    setMessage(`welcome ${user}`)
+    setTimeout(() => {setMessage(null)}, 5000)
+  }
 
   const noteById = (id) => notes.find(note => note.id === Number(id))
 
@@ -127,6 +133,10 @@ const App = () => {
               : <Link to='/login'>login</Link>
             }
           </div>
+
+          {(message &&
+            <Message success>{message}</Message>
+          )}
 
           <Route exact path='/' render={() =>
             !user
