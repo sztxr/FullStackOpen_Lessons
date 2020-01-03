@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Route, Link, Redirect, withRouter
 } from 'react-router-dom'
-import { Table, Form, Button, Alert } from 'react-bootstrap'
+import { Table, Form, Button, Alert, Navbar, Nav } from 'react-bootstrap'
 
 const Home = () => (
   <div>
@@ -64,9 +64,9 @@ let Login = props => {
       <Form onSubmit={onSubmit}>
         <Form.Group>
           <Form.Label>username:</Form.Label>
-          <Form.Control type="text" name="username"/>
+          <Form.Control type="text" name="username" />
           <Form.Label>password:</Form.Label>
-          <Form.Control type="password" name="password"/>
+          <Form.Control type="password" name="password" />
           <Button variant="primary" type="submit">login</Button>
         </Form.Group>
       </Form>
@@ -115,17 +115,28 @@ const App = () => {
       <Router>
         <div>
 
-          <div>
-            {user
-              ? <>
-                <Link style={padding} to='/'>home</Link>
-                <Link style={padding} to='/notes'>notes</Link>
-                <Link style={padding} to='/users'>users</Link>
-                <em>{user} logged in</em>
-              </>
-              : <Link to='/login'>login</Link>
-            }
-          </div>
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+              <Nav className="mr-auto">
+                <Nav.Link href="#" as="span">
+                  <Link style={padding} to="/">home</Link>
+                </Nav.Link>
+                <Nav.Link href="#" as="span">
+                  <Link style={padding} to="/notes">notes</Link>
+                </Nav.Link>
+                <Nav.Link href="#" as="span">
+                  <Link style={padding} to="/users">users</Link>
+                </Nav.Link>
+                <Nav.Link href="#" as="span">
+                  {user
+                    ? <em>{user} logged in</em>
+                    : <Link to="/login">login</Link>
+                  }
+                </Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
 
           <div>
             {(message && <Alert variant="success">{message}</Alert>)}
