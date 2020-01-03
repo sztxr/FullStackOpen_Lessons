@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Route, Link, Redirect, withRouter
 } from 'react-router-dom'
-import { Table, Form, Button } from 'react-bootstrap'
+import { Table, Form, Button, Alert } from 'react-bootstrap'
 
 const Home = () => (
   <div>
@@ -98,7 +98,13 @@ const App = () => {
   ])
 
   const [user, setUser] = useState(null)
-  const login = user => setUser(user)
+  const [message, setMessage] = useState(null)
+
+  const login = user => {
+    setUser(user)
+    setMessage(`welcome ${user}`)
+    setTimeout(() => { setMessage(null) }, 5000)
+  }
 
   const noteById = (id) => notes.find(note => note.id === Number(id))
 
@@ -119,6 +125,10 @@ const App = () => {
               </>
               : <Link to='/login'>login</Link>
             }
+          </div>
+
+          <div>
+            {(message && <Alert variant="success">{message}</Alert>)}
           </div>
 
           <Route exact path='/' render={() =>
