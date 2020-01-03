@@ -3,7 +3,40 @@ import {
   BrowserRouter as Router,
   Route, Link, Redirect, withRouter
 } from 'react-router-dom'
+import styled from 'styled-components'
 
+// Styles
+const Button = styled.button`
+  background: Bisque;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid Chocolate;
+  border-radius: 3px;
+`
+
+const Input = styled.input`
+  margin: 0.25em;
+  padding: .5em;
+`
+
+const Page = styled.div`
+  padding: 1em;
+  background: papayawhip;
+`
+
+const Navigation = styled.div`
+  background: BurlyWood;
+  padding: 1em;
+`
+
+const Footer = styled.div`
+  background: Chocolate;
+  padding: 1em;
+  margin-top: 1em;
+`
+
+// Components
 const Home = () => (
   <div>
     <h2>Notes app</h2>
@@ -56,9 +89,9 @@ let Login = props => {
     <div>
       <h2>Login</h2>
       <form onSubmit={onSubmit}>
-        <div>username: <input /></div>
-        <div>password: <input /></div>
-        <button type="submit">login</button>
+        <div>username: <Input /></div>
+        <div>password: <Input type="password" /></div>
+        <Button type="submit" primary=''>login</Button>
       </form>
     </div>
   )
@@ -66,6 +99,7 @@ let Login = props => {
 
 Login = withRouter(Login)
 
+// App
 const App = () => {
   const [notes, setNotes] = useState([
     {
@@ -96,11 +130,11 @@ const App = () => {
   const padding = { padding: 5 }
 
   return (
-    <div>
+    <Page>
       <Router>
         <div>
 
-          <div>
+          <Navigation>
             {user
               ? <>
                 <Link style={padding} to='/'>home</Link>
@@ -110,7 +144,7 @@ const App = () => {
               </>
               : <Link to='/login'>login</Link>
             }
-          </div>
+          </Navigation>
 
           <Route exact path='/' render={() =>
             !user
@@ -133,11 +167,10 @@ const App = () => {
         </div>
       </Router>
 
-      <div>
-        <br />
+      <Footer>
         <em>Note app, Department of Computer Science 2019</em>
-      </div>
-    </div>
+      </Footer>
+    </Page>
   )
 }
 
