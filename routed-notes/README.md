@@ -1,5 +1,5 @@
 # Full Stack Open 2019 &mdash; Notes App Exercise
-### Code for a simplified version of the **Notes App**, with `react-router`
+### Code for a simplified version of the **Notes App**, with `react-router` and [`Bootstrap`](https://react-bootstrap.github.io/).
 
 &nbsp;
 ---
