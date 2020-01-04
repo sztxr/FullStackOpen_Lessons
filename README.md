@@ -1,7 +1,7 @@
 # Full Stack Open 2019 &mdash; Lessons Exercise
 
 ### &mdash; **React Exercises** (part2-5):
-  - #### **Notes App** &ndash; **[Frontend](https://github.com/sztxr/FullStackOpen_Lessons/tree/master/frontend) & [Backend](https://github.com/sztxr/FullStackOpen_Lessons/tree/master/backend) code**
+  - #### **Notes App** &ndash; **[Frontend](https://github.com/sztxr/FullStackOpen_Lessons/tree/part5-4/frontend) & [Backend](https://github.com/sztxr/FullStackOpen_Lessons/tree/part5-4/backend) code**
 
 ### &mdash; **Redux Exercises** (part6):
   - #### [**Counter App with Redux**](https://github.com/sztxr/FullStackOpen_Lessons/tree/112ffcf4674f5cc16c0e9bcf599972f69e1a0ecf/redux-counter)
@@ -12,6 +12,7 @@
   - #### [**Routed Notes App**](https://github.com/sztxr/FullStackOpen_Lessons/tree/112ffcf4674f5cc16c0e9bcf599972f69e1a0ecf/routed-notes-semantic) *(no redux)* + Semantic UI
   - #### [**Routed Notes App**](https://github.com/sztxr/FullStackOpen_Lessons/tree/master/routed-notes-styled) *(no redux)* + Styled Components
   - #### [**Webpack Intro**](https://github.com/sztxr/FullStackOpen_Lessons/tree/master/webpack-part7)
+  - #### **Notes App** &ndash; **[Frontend](https://github.com/sztxr/FullStackOpen_Lessons/tree/part7-4/frontend) & [Backend](https://github.com/sztxr/FullStackOpen_Lessons/tree/part7-4/backend) code**
 
 &nbsp;
 ---
