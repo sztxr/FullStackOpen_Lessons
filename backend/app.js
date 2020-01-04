@@ -38,6 +38,11 @@ app.use(express.static('build'))
 app.use(bodyParser.json())
 app.use(middleware.requestLogger)
 
+if (process.env.NODE_ENV === 'test') {
+  const testingRouter = require('./controllers/testing')
+  app.use('/api/testing', testingRouter)
+}
+
 /*
     The router we defined earlier is used if the URL of the request starts with /api/notes.
     For this reason, the notesRouter object must only define the relative parts of the routes,

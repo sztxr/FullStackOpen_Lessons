@@ -1,5 +1,5 @@
 {
-  "name": "part1",
+  "name": "frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -7,7 +7,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
-    "react-scripts": "3.1.2"
+    "react-scripts": "^3.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -41,5 +41,5 @@
     "eslint-plugin-jest": "^23.1.1",
     "json-server": "^0.15.1"
   },
-  "proxy": "http://localhost:3003"
+  "proxy": "http://localhost:3001"
 }
