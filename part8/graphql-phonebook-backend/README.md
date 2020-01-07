@@ -1,9 +1,9 @@
 # Full Stack Open 2019 &mdash; GraphQL Exercise
 ### **Phonebook App** with *GraphQL* (backend)
 
-### &mdash; Start GraphQL-playground: `npm start`
+#### &mdash; Start GraphQL-playground: `npm start`
 
-### &mdash; Query for fetching a single person
+#### &mdash; Query for fetching a single person
 ```js
 query {
   findPerson(name: "Arto Hellas") {
@@ -16,7 +16,7 @@ query {
 }
 ```
 
-### &mdash; Filter the query returning all persons with the parameter phone so, that it returns only persons with or without a phone number
+#### &mdash; Filter the query returning all persons with the parameter phone so, that it returns only persons with or without a phone number
 ```js
 query {
   allPersons(phone: YES) {
@@ -33,7 +33,7 @@ query {
 }
 ```
 
-### &mdash; Combining queries.
+#### &mdash; Combining queries.
 In some cases it might be beneficial to name the queries. This is the case especially when the queries or mutations have parameters.
 ```js
 query {
@@ -57,7 +57,7 @@ query phoneOwnership {
 }
 ```
 
-### &mdash; A new person can be added with the following mutation
+#### &mdash; A new person can be added with the following mutation
 ```js
 mutation {
   addPerson(
@@ -77,7 +77,7 @@ mutation {
 }
 ```
 
-### &mdash; Mutation for changing the phone number of a person
+#### &mdash; Mutation for changing the phone number of a person
 ```js
 mutation {
   editNumber(
