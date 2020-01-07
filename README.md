@@ -55,6 +55,13 @@
 - `part7-5` &mdash; [**[e]**](https://fullstackopen.com/en/part7/miscellaneous) Miscellaneous
 - `part7-6` &mdash; [**[f]**](https://fullstackopen.com/en/part7/exercises_extending_the_bloglist) Exercises: extending the bloglist
 
+### part8
+- `part8-1` &mdash; [**[a]**](https://fullstackopen.com/en/part8/graph_ql_server) GraphQL-server
+- `part8-2` &mdash; [**[b]**](https://fullstackopen.com/en/part8/react_and_graph_ql) React and GraphQL
+- `part8-3` &mdash; [**[c]**](https://fullstackopen.com/en/part8/database_and_user_administration) Database and user administration
+- `part8-4` &mdash; [**[d]**](https://fullstackopen.com/en/part8/login_and_updating_the_cache) Login and updating the cache
+- `part8-5` &mdash; [**[e]**](https://fullstackopen.com/en/part8/fragments_and_subscriptions) Fragments and subscriptions
+
 &nbsp;
 ---
 ---
