@@ -38,6 +38,8 @@ const App = () => {
     <div>
       <ApolloConsumer>
         {(client) =>
+          //pollInterval={} makes the changes visible immediately after adding a new person
+          // but this signifies pointless web traffic
           <Query query={ALL_PERSONS}>
             {(result) => <Persons result={result} client={client} />}
           </Query>
@@ -45,7 +47,12 @@ const App = () => {
       </ApolloConsumer>
 
       <h2>create new</h2>
-      <Mutation mutation={CREATE_PERSON}>
+      {/* refetchQueries={}  queries ALL_PERSONS only after a person is added */}
+      {/* there is no extra web traffic, but the changes won't show to other users immediately */}
+      <Mutation
+        mutation={CREATE_PERSON}
+        refetchQueries={[{ query: ALL_PERSONS }]}
+      >
         {(addPerson) => <PersonForm addPerson={addPerson} />}
       </Mutation>
     </div>
