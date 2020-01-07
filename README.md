@@ -14,6 +14,9 @@
   - #### [**Webpack Intro**](https://github.com/sztxr/FullStackOpen_Lessons/tree/master/webpack-part7)
   - #### **Notes App** &ndash; **[Frontend](https://github.com/sztxr/FullStackOpen_Lessons/tree/part7-4/frontend) & [Backend](https://github.com/sztxr/FullStackOpen_Lessons/tree/part7-4/backend) code**
 
+### &mdash; **GraphQL** (part8):
+  - #### [**Phonebook backend**]() (with GraphQL)
+
 &nbsp;
 ---
 
