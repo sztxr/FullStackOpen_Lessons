@@ -1,30 +1,23 @@
 import React from 'react'
-import ApolloClient, { gql } from 'apollo-boost'
+import { Query } from 'react-apollo'
+import { gql } from 'apollo-boost'
+import Persons from './components/Persons'
 
-const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql'
-})
-
-const query = gql`
+const ALL_PERSONS = gql`
 {
   allPersons  {
-    name,
-    phone,
-    address {
-      street,
-      city
-    }
+    name
+    phone
     id
   }
 }
 `
 
-client.query({ query })
-  .then((response) => console.log(response.data))
-
-function App() {
+const App = () => {
   return (
-    <div>GraphQL</div>
+    <Query query={ALL_PERSONS}>
+      {(result) => <Persons result={result} />}
+    </Query>
   )
 }
 
