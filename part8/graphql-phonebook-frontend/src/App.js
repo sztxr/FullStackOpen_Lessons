@@ -1,5 +1,5 @@
 import React from 'react'
-import { Query } from 'react-apollo'
+import { Query, ApolloConsumer } from 'react-apollo'
 import { gql } from 'apollo-boost'
 import Persons from './components/Persons'
 
@@ -15,9 +15,13 @@ const ALL_PERSONS = gql`
 
 const App = () => {
   return (
-    <Query query={ALL_PERSONS}>
-      {(result) => <Persons result={result} />}
-    </Query>
+    <ApolloConsumer>
+      {(client =>
+        <Query query={ALL_PERSONS}>
+          {(result) => <Persons result={result} client={client} />}
+        </Query>
+      )}
+    </ApolloConsumer>
   )
 }
 
