@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Query, ApolloConsumer, Mutation } from 'react-apollo'
 import { gql } from 'apollo-boost'
 import Persons from './components/Persons'
@@ -34,8 +34,18 @@ const CREATE_PERSON = gql`
 `
 
 const App = () => {
+  const [errorMessage, setErrorMessage] = useState(null)
+  const handleError = (error) => {
+    setErrorMessage(error.graphQLErrors[0].message)
+    setTimeout(() => { setErrorMessage(null) }, 5000)
+  }
+
   return (
     <div>
+      {errorMessage &&
+        <div style={{ color: 'red' }}>{errorMessage}</div>
+      }
+
       <ApolloConsumer>
         {(client) =>
           //pollInterval={} makes the changes visible immediately after adding a new person
@@ -52,6 +62,7 @@ const App = () => {
       <Mutation
         mutation={CREATE_PERSON}
         refetchQueries={[{ query: ALL_PERSONS }]}
+        onError={handleError}
       >
         {(addPerson) => <PersonForm addPerson={addPerson} />}
       </Mutation>
