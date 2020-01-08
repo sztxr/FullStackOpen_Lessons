@@ -4,6 +4,9 @@ const Person = require('./models/person')
 const User = require('./models/user')
 const jwt = require('jsonwebtoken')
 
+const { PubSub } = require('apollo-server')
+const pubsub = new PubSub()
+
 mongoose.set('useFindAndModify', false)
 
 const JWT_SECRET = 'SECRET_KEY'
@@ -95,7 +98,11 @@ const typeDefs = gql`
     addAsFriend(
       name: String!
     ): User
-  }  
+  }
+
+  type Subscription {
+    personAdded: Person!
+  }
 `
 
 const resolvers = {
@@ -109,7 +116,7 @@ const resolvers = {
     me: (root, args, context) => context.currentUser
   },
   Person: {
-    address: (root) => {
+    address: root => {
       return {
         street: root.street,
         city: root.city
@@ -133,6 +140,9 @@ const resolvers = {
       catch (error) {
         throw new UserInputError(error.message, { invalidArgs: args })
       }
+
+      pubsub.publish('PERSON_ADDED', { personAdded: person })
+
       return person
     },
     editNumber: async (root, args) => {
@@ -145,12 +155,31 @@ const resolvers = {
       catch (error) {
         throw new UserInputError(error.message, { invalidArgs: args })
       }
+
       return person
+    },
+    addAsFriend: async (root, args, { currentUser }) => {
+      const nonFriendAlready = (person) => 
+        !currentUser.friends.map(f => f._id).includes(person._id)
+
+      if (!currentUser) {
+        throw new AuthenticationError("not authenticated")
+      }
+
+      const person = await Person.findOne({ name: args.name })
+      if (nonFriendAlready(person)) {
+        currentUser.friends = currentUser.friends.concat(person)
+      }
+
+      await currentUser.save()
+
+      return currentUser
     },
     createUser: (root, args) => {
       const user = new User({ username: args.username })
 
-      return user.save()
+      return user
+        .save()
         .catch(error => {
           throw new UserInputError(error.message, { invalidArgs: args })
         })
@@ -168,25 +197,13 @@ const resolvers = {
       }
 
       return { value: jwt.sign(userForToken, JWT_SECRET) }
+    }, 
+  },
+  Subscription: {
+    personAdded: {
+      subscribe: () => pubsub.asyncIterator(['PERSON_ADDED'])
     },
-    addAsFriend: async (root, args, { currentUser }) => {
-      const nonFriendAlready = (person) =>
-        !currentUser.friends.map(f => f._id).includes(person._id)
-
-      if (!currentUser) {
-        throw new AuthenticationError("not authenticated")
-      }
-
-      const person = await Person.findOne({ name: args.name })
-      if (nonFriendAlready(person)) {
-        currentUser.friends = currentUser.friends.concat(person)
-      }
-
-      await currentUser.save()
-
-      return currentUser
-    }
-  }
+  },
 }
 
 const server = new ApolloServer({
@@ -202,6 +219,7 @@ const server = new ApolloServer({
   }
 })
 
-server.listen().then(({ url }) => {
+server.listen().then(({ url, subscriptionsUrl }) => {
   console.log(`Server ready at ${url}`)
+  console.log(`Subscriptions ready at ${subscriptionsUrl}`)
 })
