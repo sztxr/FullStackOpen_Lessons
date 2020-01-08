@@ -8,20 +8,20 @@ import LoginForm from './components/LoginForm'
 
 const LOGIN = gql`
   mutation login($username: String!, $password: String!) {
-    login(username: $username, password: $password) {
+    login(username: $username, password: $password)  {
       value
     }
   }
 `
 
 const ALL_PERSONS = gql`
-{
-  allPersons  {
-    name
-    phone
-    id
+  {
+    allPersons  {
+      name
+      phone
+      id
+    }
   }
-}
 `
 
 const CREATE_PERSON = gql`
@@ -44,17 +44,17 @@ const CREATE_PERSON = gql`
 `
 
 const EDIT_NUMBER = gql`
-mutation editNumber($name: String!, $phone: String!) {
-  editNumber(name: $name, phone: $phone)  {
-    name
-    phone
-    address {
-      street
-      city
+  mutation editNumber($name: String!, $phone: String!) {
+    editNumber(name: $name, phone: $phone)  {
+      name
+      phone
+      address {
+        street
+        city
+      }
+      id
     }
-    id
   }
-}
 `
 
 const App = () => {
@@ -75,7 +75,9 @@ const App = () => {
     refetchQueries: [{ query: ALL_PERSONS }]
   })
 
-  const [editNumber] = useMutation(EDIT_NUMBER)
+  const [editNumber] = useMutation(EDIT_NUMBER, {
+    onError: handleError
+  })
 
   const [login] = useMutation(LOGIN, {
     onError: handleError
@@ -106,7 +108,7 @@ const App = () => {
   return (
     <div>
       <button onClick={logout}>logout</button>
-      
+
       {errorMessage &&
         <div style={{ color: 'red' }}>{errorMessage}</div>
       }
