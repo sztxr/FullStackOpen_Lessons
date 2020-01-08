@@ -1,5 +1,17 @@
 const { ApolloServer, UserInputError, gql } = require('apollo-server')
 const uuid = require('uuid/v1')
+const mongoose = require('mongoose')
+const Person = require('./models/person')
+
+mongoose.set('useFindAndModify', false)
+
+const MONGODB_URI = 'mongodb+srv://fullstack:fullstack00@cluster0-xmghj.mongodb.net/test?retryWrites=true&w=majority'
+
+console.log('connecting to', MONGODB_URI)
+
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true })
+  .then(() => console.log('connected to MongoDB'))
+  .catch((error) => console.log('error connecting to MongoDB', error.message))
 
 let persons = [
   {
@@ -64,14 +76,12 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    personCount: () => persons.length,
+    personCount: () => Person.collection.countDocuments(),
     allPersons: (root, args) => {
-      if (!args.phone) return persons
-      const byPhone = (person) => args.phone === 'YES' ? person.phone: !person.phone
-      return persons.filter(byPhone)
+      if (!args.phone) return Person.find({})
+      return Person.find({ phone: { $exist: args.phone === 'YES' } })
     },
-    findPerson: (root, args) =>
-      persons.find(p => p.name === args.name)
+    findPerson: (root, args) => Person.findOne({ name: args.name })
   },
   Person: {
     address: (root) => {
@@ -83,23 +93,13 @@ const resolvers = {
   },
   Mutation: {
     addPerson: (root, args) => {
-      if (persons.find(p => p.name === args.name)) {
-        throw new UserInputError('Name must be unique', {
-          invalidArgs: args.name,
-        })
-      }
-
-      const person = { ...args, id: uuid() }
-      persons = persons.concat(person)
-      return person
+      const person = new Person({...args})
+      return person.save()
     },
-    editNumber: (root, args) => {
-      const person = persons.find(p => p.name === args.name)
-      if (!person) return null
-
-      const updatedPerson = { ...person, phone: args.phone }
-      persons = persons.map(p => p.name === args.name ? updatedPerson : p)
-      return updatedPerson
+    editNumber: async (root, args) => {
+      const person = await findOne({ name: args.name })
+      person.phone = args.phone
+      return person.save()
     }
   }
 }
