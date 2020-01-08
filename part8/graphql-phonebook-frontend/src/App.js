@@ -72,7 +72,15 @@ const App = () => {
 
   const [addPerson] = useMutation(CREATE_PERSON, {
     onError: handleError,
-    refetchQueries: [{ query: ALL_PERSONS }]
+    update: (store, response) => {
+      const dataInStore = store.readQuery({ query: ALL_PERSONS })
+      dataInStore.allPersons.push(response.data.addPerson)
+      store.writeQuery({
+        query: ALL_PERSONS,
+        data: dataInStore
+      })
+    }
+    // refetchQueries: [{ query: ALL_PERSONS }]
   })
 
   const [editNumber] = useMutation(EDIT_NUMBER, {

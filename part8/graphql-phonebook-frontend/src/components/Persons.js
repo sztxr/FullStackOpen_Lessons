@@ -25,7 +25,10 @@ const Persons = ({ result }) => {
   const showPerson = async (name) => {
     const { data } = await client.query({
       query: FIND_PERSON,
-      variables: { nameToSearch: name }
+      variables: { nameToSearch: name },
+      // When necessary it is possible to disable cache for the whole app or single queries
+      // by setting the field managing the use of cache, fetchPolicy as no-cache
+      // fetchPolicy: 'no-cache'
     })
     setPerson(data.findPerson)
   }
