@@ -1,9 +1,18 @@
 import React, { useState } from 'react'
 import { gql } from 'apollo-boost'
-import { useQuery, useMutation } from '@apollo/react-hooks'
+import { useQuery, useMutation, useApolloClient } from '@apollo/react-hooks'
 import Persons from './components/Persons'
 import PersonForm from './components/PersonForm'
 import PhoneForm from './components/PhoneForm'
+import LoginForm from './components/LoginForm'
+
+const LOGIN = gql`
+  mutation login($username: String!, $password: String!) {
+    login(username: $username, password: $password) {
+      value
+    }
+  }
+`
 
 const ALL_PERSONS = gql`
 {
@@ -49,13 +58,16 @@ mutation editNumber($name: String!, $phone: String!) {
 `
 
 const App = () => {
+  const [token, setToken] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
 
   const handleError = (error) => {
     setErrorMessage(error.graphQLErrors[0].message)
     setTimeout(() => { setErrorMessage(null) }, 5000)
   }
-  
+
+  const client = useApolloClient()
+
   const persons = useQuery(ALL_PERSONS)
 
   const [addPerson] = useMutation(CREATE_PERSON, {
@@ -65,8 +77,36 @@ const App = () => {
 
   const [editNumber] = useMutation(EDIT_NUMBER)
 
+  const [login] = useMutation(LOGIN, {
+    onError: handleError
+  })
+
+  const logout = () => {
+    setToken(null)
+    localStorage.clear()
+    client.resetStore()
+  }
+
+  const errorNotification = () => errorMessage &&
+    <div style={{ color: 'red' }}>{errorMessage}</div>
+
+  if (!token) {
+    return (
+      <div>
+        {errorNotification()}
+        <h2>Login</h2>
+        <LoginForm
+          login={login}
+          setToken={(token) => setToken(token)}
+        />
+      </div>
+    )
+  }
+
   return (
     <div>
+      <button onClick={logout}>logout</button>
+      
       {errorMessage &&
         <div style={{ color: 'red' }}>{errorMessage}</div>
       }
@@ -78,6 +118,7 @@ const App = () => {
 
       <h2>change number</h2>
       <PhoneForm editNumber={editNumber} />
+
     </div>
   )
 }
