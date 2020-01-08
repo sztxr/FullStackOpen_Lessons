@@ -3,6 +3,8 @@
 
 #### &mdash; Start GraphQL-playground: `npm start`
 
+### Queries
+
 #### &mdash; Query for fetching a single person
 ```js
 query {
@@ -33,7 +35,7 @@ query {
 }
 ```
 
-#### &mdash; Combining queries.
+#### &mdash; Combining queries
 In some cases it might be beneficial to name the queries. This is the case especially when the queries or mutations have parameters.
 ```js
 query {
@@ -56,6 +58,8 @@ query phoneOwnership {
   }
 }
 ```
+
+### Mutations
 
 #### &mdash; A new person can be added with the following mutation
 ```js
@@ -92,5 +96,45 @@ mutation {
     }
     id
   }
+}
+```
+
+#### &mdash; Creating user
+```js
+mutation create{
+  createUser(
+    username: "sztxr"
+  ) {
+    username
+    friends {
+      name
+      phone
+      address {
+        street
+        city
+      }
+      id
+    }
+    id
+  }
+}
+```
+
+#### &mdash; Logging in
+```js
+mutation login {
+  login(
+    username: "sztxr"
+    password: "secred"
+  ) {
+    value
+  }
+}
+```
+
+#### &mdash; HTTP HEADERS for queries
+```js
+{
+  "Authorization": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 }
 ```
