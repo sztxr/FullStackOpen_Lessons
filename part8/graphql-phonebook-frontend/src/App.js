@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { gql } from 'apollo-boost'
-import { useQuery, useMutation, useApolloClient } from '@apollo/react-hooks'
+import { useQuery, useMutation, useSubscription, useApolloClient } from '@apollo/react-hooks'
 import Persons from './components/Persons'
 import PersonForm from './components/PersonForm'
 import PhoneForm from './components/PhoneForm'
@@ -41,6 +41,16 @@ const CREATE_PERSON = gql`
   ${PERSON_DETAILS}
 `
 
+const PERSON_ADDED = gql`
+  subscription {
+    personAdded {
+      ...PersonDetails
+    }
+  }
+  
+${PERSON_DETAILS}
+`
+
 const EDIT_NUMBER = gql`
   mutation editNumber($name: String!, $phone: String!) {
     editNumber(name: $name, phone: $phone)  {
@@ -67,21 +77,42 @@ const App = () => {
     setTimeout(() => { setErrorMessage(null) }, 5000)
   }
 
+  const notify = (message) => {
+    setErrorMessage(message)
+    setTimeout(() => { setErrorMessage(null) }, 5000)
+  }
+
   const client = useApolloClient()
 
   const persons = useQuery(ALL_PERSONS)
 
-  const [addPerson] = useMutation(CREATE_PERSON, {
-    onError: handleError,
-    update: (store, response) => {
-      const dataInStore = store.readQuery({ query: ALL_PERSONS })
-      dataInStore.allPersons.push(response.data.addPerson)
-      store.writeQuery({
+  const updateCacheWith = (addedPerson) => {
+    const includedIn = (set, object) =>
+      set.map(p => p.id).includes(object.id)  
+
+    const dataInStore = client.readQuery({ query: ALL_PERSONS })
+    if (!includedIn(dataInStore.allPersons, addedPerson)) {
+      dataInStore.allPersons.push(addedPerson)
+      client.writeQuery({
         query: ALL_PERSONS,
         data: dataInStore
       })
+    }   
+  }
+
+  useSubscription(PERSON_ADDED, {
+    onSubscriptionData: ({ subscriptionData }) => {
+      const addedPerson = subscriptionData.data.personAdded
+      notify(`${addedPerson.name} added`)
+      updateCacheWith(addedPerson)
     }
-    // refetchQueries: [{ query: ALL_PERSONS }]
+  })
+
+  const [addPerson] = useMutation(CREATE_PERSON, {
+    onError: handleError,
+    update: (store, response) => {
+      updateCacheWith(response.data.addPerson)
+    }
   })
 
   const [editNumber] = useMutation(EDIT_NUMBER, {
