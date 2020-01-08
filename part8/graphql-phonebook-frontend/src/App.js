@@ -6,10 +6,14 @@ import PersonForm from './components/PersonForm'
 import PhoneForm from './components/PhoneForm'
 import LoginForm from './components/LoginForm'
 
-const LOGIN = gql`
-  mutation login($username: String!, $password: String!) {
-    login(username: $username, password: $password)  {
-      value
+const PERSON_DETAILS = gql`
+  fragment PersonDetails on Person {
+    id
+    name
+    phone
+    address {
+      street
+      city
     }
   }
 `
@@ -17,11 +21,10 @@ const LOGIN = gql`
 const ALL_PERSONS = gql`
   {
     allPersons  {
-      name
-      phone
-      id
+      ...PersonDetails
     }
   }
+  ${PERSON_DETAILS}
 `
 
 const CREATE_PERSON = gql`
@@ -32,27 +35,25 @@ const CREATE_PERSON = gql`
       city: $city,
       phone: $phone
     ) {
-      name
-      phone
-      id
-      address {
-        street
-        city
-      }
+      ...PersonDetails
     }
   }
+  ${PERSON_DETAILS}
 `
 
 const EDIT_NUMBER = gql`
   mutation editNumber($name: String!, $phone: String!) {
     editNumber(name: $name, phone: $phone)  {
-      name
-      phone
-      address {
-        street
-        city
-      }
-      id
+      ...PersonDetails
+    }
+  }
+  ${PERSON_DETAILS}
+`
+
+const LOGIN = gql`
+  mutation login($username: String!, $password: String!) {
+    login(username: $username, password: $password)  {
+      value
     }
   }
 `

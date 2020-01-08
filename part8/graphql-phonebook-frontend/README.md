@@ -1,3 +1,86 @@
+# Full Stack Open 2019 &mdash; GraphQL Exercise
+### **Phonebook App** with *GraphQL* (frontend)
+
+
+### Fragments
+
+#### &mdash; With fragments we can do the queries in a compact form
+The fragments are **not defined** in the GraphQL schema, but in the client.
+The fragments must be declared when the client uses them for queries.
+```js
+fragment PersonDetails on Person {
+  name
+  phone 
+  address {
+    street 
+    city
+  }
+}
+
+// query
+query {
+  allPersons {
+    ...PersonDetails
+  }
+}
+
+query {
+  findPerson(name: "Pekka Mikkola") {
+    ...PersonDetails
+  }
+}
+```
+
+In principle, we could declare the fragment with each query like so:
+```js
+const ALL_PERSONS = gql`
+  {
+    allPersons  {
+      ...PersonDetails
+    }
+  }
+
+  fragment PersonDetails on Person {
+    name
+    phone 
+    address {
+      street 
+      city
+    }
+  }
+`
+```
+
+However, it is much better to declare the fragment once and save it to a variable:
+```js
+const PERSON_DETAILS = gql`
+  fragment PersonDetails on Person {
+    id
+    name
+    phone 
+    address {
+      street 
+      city
+    }
+  }
+`
+```
+
+Declared like this, the fragment can be placed to any query or mutation using a dollar sign and curly braces:
+```js
+const ALL_PERSONS = gql`
+  {
+    allPersons  {
+      ...PersonDetails
+    }
+  }
+  ${PERSON_DETAILS}  
+`
+```
+
+&nbsp;
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
